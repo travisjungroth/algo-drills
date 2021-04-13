@@ -1,0 +1,18 @@
+"""Python Algorithms, Page 82. Cyclic graph will return the nodes that can be sorted."""
+from collections import Counter
+from collections.abc import Iterable, Mapping
+from itertools import chain
+
+from hints import Node
+
+
+def topo_sort(graph: Mapping[Node, Iterable]) -> Iterable[Node]:
+    in_degrees = Counter(chain(*graph.values()))
+    zero_in_degrees = [node for node in graph if not in_degrees[node]]
+    while zero_in_degrees:
+        node = zero_in_degrees.pop()
+        yield node
+        for next_node in graph[node]:
+            in_degrees[next_node] -= 1
+            if not in_degrees[next_node]:
+                zero_in_degrees.append(next_node)
