@@ -114,7 +114,9 @@ class Workspace(Code):
             f.write(algo.workspace_ready())
 
     def advance(self) -> Algo:
-        algo = choose_algo(Completion.history(), ALGOS_DICT.values())
+        with open('allowed.csv') as f:
+            allowed = [ALGOS_DICT[int(i)] for i, in csv.reader(f)]
+        algo = choose_algo(Completion.history(), allowed)
         self.write_algo(algo)
         return algo
 
