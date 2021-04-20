@@ -4,10 +4,11 @@ from abc import ABC, abstractmethod
 from collections.abc import Sequence
 import csv
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timedelta
 from difflib import ndiff
 import io
 import re
+from time import time
 import tokenize
 from typing import Final, Iterable, Optional
 
@@ -151,3 +152,24 @@ def choose_algo(history: Sequence[Completion], algos: Iterable[Algo]) -> Algo:
     if not all(history[0] == h for h in history[1:repeats + 1]):
         return history[0]
     return max(algos, key=lambda x: history.index(x) if x in history else len(history))
+
+
+def start_timer() -> None:
+    with open('start_time.txt', 'w') as f:
+        f.write(str(int(time())))
+
+
+def stop_timer() -> Optional[timedelta]:
+    now = int(time())
+    with open('start_time.txt', 'r+') as f:
+        txt = f.read()
+        if not txt:
+            return None
+        start = int(txt)
+        f.write('')
+    return timedelta(seconds=now - start)
+
+
+def minutes_seconds(td: timedelta) -> str:
+    m, s = divmod(int(td.total_seconds()), 60)
+    return f'{m}:{s:02}'
