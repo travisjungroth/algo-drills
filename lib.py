@@ -51,7 +51,7 @@ class Code(ABC):
                 out += token_string
             last_col = end_col
             last_lineno = end_line
-        out = '\n'.join(line.rstrip() if line.rstrip() else line for line in out.splitlines())
+        out = '\n'.join(line.rstrip() if line.rstrip() else line for line in out.splitlines()).lstrip()
         return out
 
     def diff_ready(self) -> list[str]:
