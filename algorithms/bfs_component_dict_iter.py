@@ -1,12 +1,12 @@
 """Python Algorithms, Page 102."""
 
 from collections import deque
-from collections.abc import Mapping, Set
+from collections.abc import Iterable, Mapping, Set
 
 from hints import Node
 
 
-def bfs_component_dict_iter(graph: Mapping[Node, Set[Node]], start: Node) -> set[Node]:
+def bfs_component_dict_iter(graph: Mapping[Node, Set[Node]], start: Node) -> Iterable[Node]:
     component = set()
     queue = deque([start])
     while queue:
