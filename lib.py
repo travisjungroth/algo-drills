@@ -76,7 +76,7 @@ class Algo(Code):
 
     @classmethod
     def all(cls) -> list[Algo]:
-        return [cls(name[:-len('.py')]) for name in os.listdir(ALGO_DIR)]
+        return [cls(name[:-len('.py')]) for name in os.listdir(ALGO_DIR) if not name.startswith('_')]
 
     @classmethod
     def id_dict(cls) -> dict[str, Algo]:
