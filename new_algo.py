@@ -20,5 +20,7 @@ def {name}():
 with open(f'user_algorithms/{name}.py', 'x') as f:
     f.write(text)
 
-with open('data/allowed.csv', 'a') as f:
+with open('data/allowed.csv', 'a+') as f:
     f.write(str(uuid) + '\n')
+
+print(f'Created {name}.py in user_algorithms.')

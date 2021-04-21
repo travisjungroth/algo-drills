@@ -9,6 +9,7 @@ from difflib import ndiff
 import io
 from itertools import groupby
 import os
+from pathlib import Path
 import re
 from time import time
 import tokenize
@@ -89,6 +90,10 @@ class Algo(Code):
 
     @classmethod
     def allowed(cls) -> list[Algo]:
+        file = Path('data/allowed.csv')
+        if not file.exists():
+            with file.open('w+') as f:
+                f.write('d5c1e52d-602a-4c27-a39f-2b53caff987d\n')  # bisect_search
         with open('data/allowed.csv') as f:
             allowed_ids = set(f.read().splitlines())
             allowed_ids.discard('')
@@ -187,7 +192,7 @@ def choose_algo(history: Sequence[Completion], algos: Iterable[Algo]) -> Algo:
 
 
 def start_timer() -> None:
-    with open('data/start_time.txt', 'w') as f:
+    with open('data/start_time.txt', 'w+') as f:
         f.write(str(int(time())))
 
 
