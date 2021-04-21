@@ -9,7 +9,8 @@ from collections.abc import Iterable, Mapping, Set
 from hints import Node
 
 
-def bfs_component_dict_iter(graph: Mapping[Node, Set[Node]], start: Node) -> Iterable[Node]:
+def bfs_component_dict(graph: Mapping[Node, Set[Node]], start: Node) -> Iterable[Node]:
+    """Find all the nodes connected to the starting node, using BFS on a dict."""
     component = set()
     queue = deque([start])
     while queue:
