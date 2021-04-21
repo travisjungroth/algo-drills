@@ -84,7 +84,7 @@ class Algo(Code):
 
     @classmethod
     def allowed(cls) -> list[Algo]:
-        with open('data/allowed') as f:
+        with open('data/allowed.csv') as f:
             allowed_ids = set(f.readlines())
         return [x for x in cls.all() if x.uuid() in allowed_ids]
 
