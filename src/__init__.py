@@ -13,7 +13,7 @@ from pathlib import Path
 import re
 from time import time
 import tokenize
-from typing import Iterable, Optional
+from typing import ClassVar, Iterable, Optional
 
 
 class Code(ABC):
@@ -151,28 +151,26 @@ class Workspace(Code):
 class Completion:
     algo: Algo
     datetime: datetime = field(default_factory=lambda: datetime.now().astimezone())
-    file_name: str = 'data/history.csv'
+    history_path: ClassVar[Path] = Path('data/history.csv')
 
     @classmethod
     def history(cls) -> list[Completion]:
-        with open(cls.file_name) as f:
+        cls.history_path.touch()
+        with cls.history_path.open() as f:
             algos_dict = Algo.id_dict()
-            return [
-                       cls(algos_dict[d['id']], datetime.fromisoformat(d['datetime']))
-                       for d in csv.DictReader(f)
-                   ][::-1]
+            return [cls(algos_dict[uuid], datetime.fromisoformat(dt)) for dt, uuid in csv.reader(f)][::-1]
 
     def append_to_file(self) -> None:
-        with open(self.file_name, 'a') as f:
+        with self.history_path.open('a+') as f:
             writer = csv.writer(f)
             writer.writerow([self.datetime.isoformat(' ', 'seconds'), self.algo.uuid()])
         self.update_display_history()
 
     @classmethod
     def update_display_history(cls) -> None:
-        with open('data/history.txt', 'w') as f:
+        with open('data/history.txt', 'w+') as f:
             for date, completions in groupby(cls.history(), lambda x: x.datetime.date()):
-                f.write(f'{date.strftime(f"%A, %B {date.day} %Y")}\n')
+                f.write(f'{date.strftime(f"%A, %B {date.day}, %Y")}\n')
                 for completion in completions:
                     f.write(f'  {completion.datetime.strftime("%I:%M%p")} {completion.algo}\n')
 
