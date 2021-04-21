@@ -10,7 +10,7 @@ def dfs_components_grid(grid: Sequence[Sequence[int]]) -> Iterable[set[tuple[int
         while stack:
             r, c = stack.pop()
             adjacent = {(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)}
-            visit = unvisited & adjacent
+            visit = adjacent & unvisited
             unvisited -= visit
             component |= visit
             stack.extend(visit)
