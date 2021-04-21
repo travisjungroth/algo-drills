@@ -13,8 +13,6 @@ from time import time
 import tokenize
 from typing import Iterable, Optional
 
-ALGO_DIR = 'algorithms'
-
 
 class Code(ABC):
     @abstractmethod
@@ -58,6 +56,8 @@ class Code(ABC):
     def diff_ready(self) -> list[str]:
         """From cleaned to remove imports, function docstring, and trailing newlines"""
         m = re.search(r'(def.*?:\n)(?: {4}""".*?"""\n)?(.*)', self.cleaned(), re.DOTALL)
+        if m is None:
+            return self.cleaned().splitlines()
         return (m.group(1) + m.group(2)).rstrip().splitlines()
 
     def diff(self, other: Code) -> str:
@@ -70,13 +70,17 @@ class Code(ABC):
 @dataclass(frozen=True)
 class Algo(Code):
     name: str
+    dir: str
 
     def __str__(self) -> str:
         return self.name
 
     @classmethod
-    def all(cls) -> list[Algo]:
-        return [cls(name[:-len('.py')]) for name in os.listdir(ALGO_DIR) if not name.startswith('_')]
+    def all(cls) -> Iterable[Algo]:
+        for directory in ['algorithms', 'user_algorithms']:
+            for name in os.listdir(directory):
+                if not name.startswith('_') and name.endswith('.py'):
+                    yield cls(name[:-len('.py')], directory)
 
     @classmethod
     def id_dict(cls) -> dict[str, Algo]:
@@ -85,7 +89,8 @@ class Algo(Code):
     @classmethod
     def allowed(cls) -> list[Algo]:
         with open('data/allowed.csv') as f:
-            allowed_ids = set(f.readlines())
+            allowed_ids = set(f.read().splitlines())
+            allowed_ids.discard('')
         return [x for x in cls.all() if x.uuid() in allowed_ids]
 
     @classmethod
@@ -93,14 +98,14 @@ class Algo(Code):
         return {c.algo for c in Completion.history() if c.datetime.date() == datetime.today()}
 
     def text(self) -> str:
-        with open(f'{ALGO_DIR}/{self.name}.py') as f:
+        with open(f'{self.dir}/{self.name}.py') as f:
             return f.read()
 
     def uuid(self):
         return self.text().splitlines(keepends=False)[1][4:]
 
     def workspace_ready(self) -> str:
-        s = re.search(r'.*?\ndef.*?:\n {4}(?:""".*?""")?', self.cleaned(), re.DOTALL).group(0)
+        s = re.search(r'.*?def.*?:\n {4}(?:""".*?""")?', self.cleaned(), re.DOTALL).group(0)
         if s[-1] != '"':
             s += 'pass'
         s += '\n'
