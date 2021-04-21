@@ -1,4 +1,7 @@
-"""Python Algorithms, page 78"""
+"""
+916cdf1e-c509-4dfe-bdee-fef5ad30798a
+Python Algorithms, page 78
+"""
 from collections.abc import Sequence
 
 
