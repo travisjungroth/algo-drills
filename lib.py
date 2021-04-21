@@ -7,10 +7,11 @@ from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from difflib import ndiff
 import io
+import os
 import re
 from time import time
 import tokenize
-from typing import Final, Iterable, Optional
+from typing import Iterable, Optional
 
 ALGO_DIR = 'algorithms'
 
@@ -68,19 +69,35 @@ class Code(ABC):
 
 @dataclass(frozen=True)
 class Algo(Code):
-    id: int
     name: str
 
     def __str__(self) -> str:
         return self.name
 
     @classmethod
-    def today(cls) -> set[Algo]:
+    def all(cls) -> list[Algo]:
+        return [cls(name[:-len('.py')]) for name in os.listdir(ALGO_DIR)]
+
+    @classmethod
+    def id_dict(cls) -> dict[str, Algo]:
+        return {a.uuid(): a for a in cls.all()}
+
+    @classmethod
+    def allowed(cls) -> list[Algo]:
+        with open('data/allowed') as f:
+            allowed_ids = set(f.readlines())
+        return [x for x in cls.all() if x.uuid() in allowed_ids]
+
+    @classmethod
+    def done_today(cls) -> set[Algo]:
         return {c.algo for c in Completion.history() if c.datetime.date() == datetime.today()}
 
     def text(self) -> str:
         with open(f'{ALGO_DIR}/{self.name}.py') as f:
             return f.read()
+
+    def uuid(self):
+        return self.text().splitlines(keepends=False)[1][4:]
 
     def workspace_ready(self) -> str:
         s = re.search(r'.*?\ndef.*?:\n {4}(?:""".*?""")?', self.cleaned(), re.DOTALL).group(0)
@@ -88,13 +105,6 @@ class Algo(Code):
             s += 'pass'
         s += '\n'
         return s
-
-
-with open('algos.csv') as _f:
-    ALGOS_DICT: Final[dict[int, Algo]] = {int(d['id']): Algo(int(d['id']), d['name'])
-                                          for d in csv.DictReader(_f)}
-with open('data/allowed.csv') as _f:
-    ALLOWED = [ALGOS_DICT[int(i)] for i, in csv.reader(_f)]
 
 
 @dataclass(frozen=True)
@@ -111,7 +121,7 @@ class Workspace(Code):
         if not m:
             return None
         algo_name = m.group(1)
-        for algo in ALGOS_DICT.values():
+        for algo in Algo.all():
             if algo_name == algo.name:
                 return algo
         raise ValueError(f'No algo found called "{algo_name}. Looking based on def in workspace.py.')
@@ -121,7 +131,7 @@ class Workspace(Code):
             f.write(algo.workspace_ready())
 
     def advance(self) -> Algo:
-        algo = choose_algo(Completion.history(), ALLOWED)
+        algo = choose_algo(Completion.history(), Algo.allowed())
         self.write_algo(algo)
         return algo
 
@@ -129,21 +139,22 @@ class Workspace(Code):
 @dataclass(frozen=True)
 class Completion:
     algo: Algo
-    datetime: datetime = field(default_factory= lambda: datetime.now().astimezone())
+    datetime: datetime = field(default_factory=lambda: datetime.now().astimezone())
     file_name: str = 'data/history.csv'
 
     @classmethod
     def history(cls) -> list[Completion]:
         with open(cls.file_name) as f:
+            algos_dict = Algo.id_dict()
             return [
-                       cls(ALGOS_DICT[int(d['id'])], datetime.fromisoformat(d['datetime']))
+                       cls(algos_dict[d['id']], datetime.fromisoformat(d['datetime']))
                        for d in csv.DictReader(f)
                    ][::-1]
 
     def append_to_file(self) -> None:
         with open(self.file_name, 'a') as f:
             writer = csv.writer(f)
-            writer.writerow([self.datetime.isoformat(' ', 'seconds'), self.algo.id])
+            writer.writerow([self.datetime.isoformat(' ', 'seconds'), self.algo.uuid()])
 
 
 def choose_algo(history: Sequence[Completion], algos: Iterable[Algo]) -> Algo:
