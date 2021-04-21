@@ -7,6 +7,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from difflib import ndiff
 import io
+from itertools import groupby
 import os
 import re
 from time import time
@@ -160,6 +161,15 @@ class Completion:
         with open(self.file_name, 'a') as f:
             writer = csv.writer(f)
             writer.writerow([self.datetime.isoformat(' ', 'seconds'), self.algo.uuid()])
+        self.update_display_history()
+
+    @classmethod
+    def update_display_history(cls) -> None:
+        with open('data/history.txt', 'w') as f:
+            for date, completions in groupby(cls.history(), lambda x: x.datetime.date()):
+                f.write(f'{date.strftime(f"%A, %B {date.day} %Y")}\n')
+                for completion in completions:
+                    f.write(f'  {completion.datetime.strftime("%I:%M%p")} {completion.algo}\n')
 
 
 def choose_algo(history: Sequence[Completion], algos: Iterable[Algo]) -> Algo:
