@@ -86,9 +86,11 @@ class Algo(Code):
         return s
 
 
-with open('algos.csv') as _algos_fp:
+with open('algos.csv') as _f:
     ALGOS_DICT: Final[dict[int, Algo]] = {int(d['id']): Algo(int(d['id']), d['name'])
-                                          for d in csv.DictReader(_algos_fp)}
+                                          for d in csv.DictReader(_f)}
+with open('allowed.csv') as _f:
+    ALLOWED = [ALGOS_DICT[int(i)] for i, in csv.reader(_f)]
 
 
 @dataclass(frozen=True)
@@ -115,9 +117,7 @@ class Workspace(Code):
             f.write(algo.workspace_ready())
 
     def advance(self) -> Algo:
-        with open('allowed.csv') as f:
-            allowed = [ALGOS_DICT[int(i)] for i, in csv.reader(f)]
-        algo = choose_algo(Completion.history(), allowed)
+        algo = choose_algo(Completion.history(), ALLOWED)
         self.write_algo(algo)
         return algo
 
