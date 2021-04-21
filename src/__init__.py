@@ -79,6 +79,7 @@ class Algo(Code):
 
     @classmethod
     def all(cls) -> Iterable[Algo]:
+        Path('user_algorithms').mkdir(exist_ok=True)
         for directory in ['algorithms', 'user_algorithms']:
             for name in os.listdir(directory):
                 if not name.startswith('_') and name.endswith('.py'):

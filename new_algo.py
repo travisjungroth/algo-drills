@@ -2,7 +2,7 @@
 """
 Takes the name of a new algo to create. Makes an empty template in user_algorithms and adds to whitelist.
 """
-
+from pathlib import Path
 import sys
 from uuid import uuid4
 
@@ -17,6 +17,7 @@ def {name}():
     pass
 '''
 
+Path('user_algorithms').mkdir(exist_ok=True)
 with open(f'user_algorithms/{name}.py', 'x') as f:
     f.write(text)
 
