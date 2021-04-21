@@ -1,3 +1,6 @@
+"""
+ID: b23383a0-792a-47e9-a13c-fe4f2417f909
+"""
 from collections.abc import Mapping
 from heapq import heappop, heappush
 from math import inf

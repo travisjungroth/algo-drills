@@ -1,4 +1,7 @@
-"""Python Algorithms, page 80"""
+"""
+ID: 834cdcc9-ff3e-497c-884e-8bf6a93a90c1
+Python Algorithms, page 80
+"""
 from collections.abc import Callable
 from typing import Optional
 

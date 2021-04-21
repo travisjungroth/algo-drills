@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import timedelta
 
-from lib import Algo, ALLOWED, Completion, minutes_seconds, start_timer, stop_timer, Workspace
+from lib import Algo, Completion, minutes_seconds, start_timer, stop_timer, Workspace
 
 
 def practice() -> None:
@@ -14,7 +14,7 @@ def practice() -> None:
             completion_time = stop_timer()
             if completion_time < timedelta(minutes=30):
                 print(minutes_seconds(completion_time))
-            if Algo.today().issuperset(ALLOWED):
+            if Algo.done_today().issuperset(Algo.allowed()):
                 print('*')
         new_algo = workspace.advance()
         start_timer()

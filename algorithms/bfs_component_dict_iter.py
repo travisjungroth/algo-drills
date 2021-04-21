@@ -1,4 +1,7 @@
-"""Python Algorithms, Page 102."""
+"""
+ID: 0ff2f1b7-0112-4990-8897-b05c2cdbcbca
+Python Algorithms, Page 102.
+"""
 
 from collections import deque
 from collections.abc import Iterable, Mapping, Set
