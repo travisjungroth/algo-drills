@@ -6,6 +6,7 @@ from collections.abc import Sequence
 
 
 def bfs_search_grid(grid: Sequence[Sequence[int]], start: tuple[int, int], goal: tuple[int, int]) -> bool:
+    """On a grid of 0s and 1s, find if start is connected to goal via a path of 1s."""
     rows = range(len(grid))
     cols = range(len(grid[0]))
     seen = {start}
