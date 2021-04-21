@@ -5,6 +5,7 @@ from collections.abc import Iterable, Sequence
 
 
 def dfs_components_grid(grid: Sequence[Sequence[int]]) -> Iterable[set[tuple[int, int]]]:
+    """On a grid of 0s and 1s, find all the components of 1s."""
     unvisited = {(r, c) for r, row in enumerate(grid) for c, n in enumerate(row) if n}
     while unvisited:
         start = unvisited.pop()

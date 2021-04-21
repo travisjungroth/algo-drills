@@ -1,5 +1,6 @@
 """
 ID: 88bad34a-271e-4096-9036-6bda1cbd4fc0
+https://eddmann.com/posts/depth-first-search-and-breadth-first-search-in-python/
 """
 from collections.abc import Mapping, Set
 from typing import Optional
@@ -12,6 +13,7 @@ def dfs_component_dict_recur(
     start: Node,
     component: Optional[Set[Node]] = None
 ) -> set[Node]:
+    """Recursively find all the nodes connected to start."""
     if component is None:
         component = set()
     component.add(start)

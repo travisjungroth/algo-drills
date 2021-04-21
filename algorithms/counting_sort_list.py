@@ -1,5 +1,6 @@
 """
 ID: 29227b58-d1f9-4575-bdf7-13dea23d77fb
+https://en.wikipedia.org/wiki/Counting_sort
 """
 from collections.abc import Callable, Sequence
 from itertools import accumulate

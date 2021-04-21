@@ -1,5 +1,6 @@
 """
 ID: 0088a99a-fcfb-40de-87ed-d26b98449d3d
+Python Algorithms, Page 79
 """
 from collections import defaultdict
 from collections.abc import Callable, Iterable

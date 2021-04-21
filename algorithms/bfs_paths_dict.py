@@ -1,5 +1,6 @@
 """
 ID: de877076-d103-430f-946c-08a82aa6a576
+https://eddmann.com/posts/depth-first-search-and-breadth-first-search-in-python/
 """
 from collections import deque
 from collections.abc import Iterable, Mapping

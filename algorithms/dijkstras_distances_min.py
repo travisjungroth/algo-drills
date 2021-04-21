@@ -10,10 +10,12 @@ from hints import Node
 
 
 def dijkstras_distances_min(graph: Mapping[Node, Mapping[Node, Rational]], start: Node) -> dict[Node: Rational]:
+    """Find the minimum distance from start to all connected nodes on a direct, weighted graph."""
     distances = dict.fromkeys(graph, inf)
     distances[start] = 0
     unvisited = set(graph)
     while unvisited:
+        # Using min like this increases the time complexity compared to a priority queue, but it simplifies things.
         node = min(unvisited, key=distances.__getitem__)
         unvisited.remove(node)
         distance = distances[node]

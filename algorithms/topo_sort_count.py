@@ -10,6 +10,7 @@ from hints import Node
 
 
 def topo_sort_count(graph: Mapping[Node, Iterable]) -> Iterable[Node]:
+    """Find a topological sorting of a graph by counting in-degrees."""
     in_degrees = Counter(chain(*graph.values()))
     zero_in_degrees = [node for node in graph if not in_degrees[node]]
     while zero_in_degrees:
