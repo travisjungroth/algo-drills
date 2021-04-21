@@ -143,14 +143,16 @@ class Completion:
 
 
 def choose_algo(history: Sequence[Completion], algos: Iterable[Algo]) -> Algo:
-    repeats = 2
     history = [completion.algo for completion in history]
     if not history:
         return next(iter(algos))
-    if len(history) <= repeats:
-        return history[0]
-    if not all(history[0] == h for h in history[1:repeats + 1]):
-        return history[0]
+    last = history[0]
+    count = history.count(last)
+    reps = max(1, 3 - (count // 12))
+    if len(history) < reps:
+        return last
+    if not all(last == h for h in history[1:reps]):
+        return last
     return max(algos, key=lambda x: history.index(x) if x in history else len(history))
 
 
