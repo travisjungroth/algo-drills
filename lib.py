@@ -74,6 +74,10 @@ class Algo(Code):
     def __str__(self) -> str:
         return self.name
 
+    @classmethod
+    def today(cls) -> set[Algo]:
+        return {c.algo for c in Completion.history() if c.datetime.date() == datetime.today()}
+
     def text(self) -> str:
         with open(f'{ALGO_DIR}/{self.name}.py') as f:
             return f.read()
@@ -125,7 +129,7 @@ class Workspace(Code):
 @dataclass(frozen=True)
 class Completion:
     algo: Algo
-    datetime: datetime = field(default_factory=datetime.utcnow)
+    datetime: datetime = field(default_factory= lambda: datetime.now().astimezone())
     file_name: str = 'history.csv'
 
     @classmethod
