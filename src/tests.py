@@ -1,4 +1,4 @@
-from lib import Algo
+from src import Algo
 
 
 def test_names_match():

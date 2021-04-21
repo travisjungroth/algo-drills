@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import timedelta
 
-from lib import Algo, Completion, minutes_seconds, start_timer, stop_timer, Workspace
+from src import Algo, Completion, minutes_seconds, start_timer, stop_timer, Workspace
 
 
 def practice() -> None:
