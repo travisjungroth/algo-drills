@@ -93,7 +93,7 @@ class Algo(Code):
 with open('algos.csv') as _f:
     ALGOS_DICT: Final[dict[int, Algo]] = {int(d['id']): Algo(int(d['id']), d['name'])
                                           for d in csv.DictReader(_f)}
-with open('allowed.csv') as _f:
+with open('data/allowed.csv') as _f:
     ALLOWED = [ALGOS_DICT[int(i)] for i, in csv.reader(_f)]
 
 
@@ -130,7 +130,7 @@ class Workspace(Code):
 class Completion:
     algo: Algo
     datetime: datetime = field(default_factory= lambda: datetime.now().astimezone())
-    file_name: str = 'history.csv'
+    file_name: str = 'data/history.csv'
 
     @classmethod
     def history(cls) -> list[Completion]:
@@ -161,13 +161,13 @@ def choose_algo(history: Sequence[Completion], algos: Iterable[Algo]) -> Algo:
 
 
 def start_timer() -> None:
-    with open('start_time.txt', 'w') as f:
+    with open('data/start_time.txt', 'w') as f:
         f.write(str(int(time())))
 
 
 def stop_timer() -> Optional[timedelta]:
     now = int(time())
-    with open('start_time.txt', 'r+') as f:
+    with open('data/start_time.txt', 'r+') as f:
         txt = f.read()
         if not txt:
             return None
