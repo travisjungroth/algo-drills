@@ -21,9 +21,9 @@ def dijkstras_path_pq(
     distances = {start: 0}
     parents = {start: None}
     visited = set()
-    pq = [(0, start)]
-    while pq:
-        distance, node = heappop(pq)
+    to_visit = [(0, start)]
+    while to_visit:
+        distance, node = heappop(to_visit)
         if node in visited:
             continue
         visited.add(node)
@@ -34,5 +34,5 @@ def dijkstras_path_pq(
             if next_node not in distances or next_distance < distances[next_node]:
                 distances[next_node] = next_distance
                 parents[next_node] = node
-                heappush(pq, (next_distance, next_node))
+                heappush(to_visit, (next_distance, next_node))
     return parents

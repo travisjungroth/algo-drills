@@ -27,6 +27,3 @@ A variable name for the return value of a function when the output is obvious, a
 
 #### Next Node
 An adjacent node. Most likely it's getting added to a collection of nodes to visit.
-
-#### PQ
-Priority queue.

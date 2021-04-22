@@ -10,12 +10,12 @@ def dfs_components_grid(grid: Sequence[Sequence[int]]) -> Iterable[set[tuple[int
     while unseen:
         start = unseen.pop()
         component = {start}
-        stack = [start]
-        while stack:
-            r, c = stack.pop()
+        to_visit = [start]
+        while to_visit:
+            r, c = to_visit.pop()
             adjacent = {(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)}
             seen = adjacent & unseen
             unseen -= seen
             component |= seen
-            stack.extend(seen)
+            to_visit.extend(seen)
         yield component

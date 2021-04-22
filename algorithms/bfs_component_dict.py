@@ -12,11 +12,11 @@ from hints import Node
 def bfs_component_dict(graph: Mapping[Node, Set[Node]], start: Node) -> Iterable[Node]:
     """Find all the nodes connected to the starting node, using BFS on a dict."""
     component = set()
-    queue = deque([start])
-    while queue:
-        node = queue.popleft()
+    to_visit = deque([start])
+    while to_visit:
+        node = to_visit.popleft()
         if node in component:
             continue
         component.add(node)
-        queue.extend(graph[node])
+        to_visit.extend(graph[node])
         yield node
