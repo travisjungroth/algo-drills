@@ -1,5 +1,6 @@
 """
 ID: 1288e78d-bc7a-44da-8774-41c0e4dcfe70
+Python Algorithms, Page 194
 https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 """
 from collections.abc import Mapping

@@ -1,5 +1,6 @@
 """
 ID: b23383a0-792a-47e9-a13c-fe4f2417f909
+Python Algorithms, Page 194
 https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Using_a_priority_queue
 Instead of decreasing priority, just always add it and check if it's visited.
 The output from this function will work with backpedal.py.
