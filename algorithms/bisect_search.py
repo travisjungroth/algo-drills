@@ -5,13 +5,12 @@ https://leetcode.com/discuss/general-discussion/786126/Python-Powerful-Ultimate-
 from collections.abc import Callable
 
 
-def bisect_search(condition: Callable[[int], bool], lower: int, upper: int) -> int:
-    """Find the lowest int between lower and upper where condition(int) is True."""
-    left, right = lower, upper
-    while left < right:
-        mid = left + (right - left) // 2
+def bisect_search(condition: Callable[[int], bool], low: int, high: int) -> int:
+    """Find the lowest int between low and high where condition(int) is True."""
+    while low < high:
+        mid = low + (high - low) // 2
         if condition(mid):
-            right = mid
+            high = mid
         else:
-            left = mid + 1
-    return left
+            low = mid + 1
+    return low
