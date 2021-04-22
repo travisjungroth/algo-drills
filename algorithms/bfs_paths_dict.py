@@ -18,5 +18,4 @@ def bfs_paths_dict(graph: Mapping[Node, set[Node]], start: Node, goal: Node) -> 
             yield path
         else:
             for next_node in graph[node].difference(path):
-                next_path = path + [next_node]
-                queue.append(next_path)
+                queue.append(path + [next_node])
