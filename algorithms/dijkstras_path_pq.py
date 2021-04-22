@@ -6,7 +6,6 @@ The output from this function will work with backpedal.py.
 """
 from collections.abc import Mapping
 from heapq import heappop, heappush
-from math import inf
 from numbers import Real
 from typing import Optional
 
@@ -19,21 +18,20 @@ def dijkstras_path_pq(
     goal: Node
 ) -> tuple[dict[Node, Real], dict[Node, Optional[Node]]]:
     """Find the shortest path from start to goal in a directed, weighted graph. Return it as a parents dict."""
-    distances = dict.fromkeys(graph, inf)
-    distances[start] = 0
-    parents = dict.fromkeys(graph)
-    unvisited = set(graph)
+    distances = {start: 0}
+    parents = {start: None}
+    visited = set()
     pq = [(0, start)]
     while pq:
         distance, node = heappop(pq)
-        if node not in unvisited:
+        if node in visited:
             continue
-        unvisited.remove(node)
+        visited.add(node)
         if node == goal:
             break
         for next_node, weight in graph[node].items():
             next_distance = distance + weight
-            if next_distance < distances[next_node]:
+            if next_node not in distances or next_distance < distances[next_node]:
                 distances[next_node] = next_distance
                 parents[next_node] = node
                 heappush(pq, (next_distance, next_node))
