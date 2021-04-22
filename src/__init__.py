@@ -159,7 +159,11 @@ class Completion:
         cls.history_path.touch()
         with cls.history_path.open() as f:
             algos_dict = Algo.id_dict()
-            return [cls(algos_dict[uuid], datetime.fromisoformat(dt)) for dt, uuid in csv.reader(f)][::-1]
+            out = []
+            for dt, uuid in csv.reader(f):
+                if uuid in algos_dict:
+                    out.append(cls(algos_dict[uuid], datetime.fromisoformat(dt)))
+        return out[::-1]
 
     def append_to_file(self) -> None:
         with self.history_path.open('a+') as f:
