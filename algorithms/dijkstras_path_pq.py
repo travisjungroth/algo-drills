@@ -16,7 +16,7 @@ def dijkstras_path_pq(
     graph: Mapping[Node, Mapping[Node, Real]],
     start: Node,
     goal: Node
-) -> tuple[dict[Node, Real], dict[Node, Optional[Node]]]:
+) -> dict[Node, Optional[Node]]:
     """Find the shortest path from start to goal in a directed, weighted graph. Return it as a parents dict."""
     distances = {start: 0}
     parents = {start: None}
@@ -35,4 +35,4 @@ def dijkstras_path_pq(
                 distances[next_node] = next_distance
                 parents[next_node] = node
                 heappush(pq, (next_distance, next_node))
-    return distances, parents
+    return parents
