@@ -11,7 +11,7 @@ from hints import Node
 
 
 def dijkstras_distances_min(graph: Mapping[Node, Mapping[Node, Rational]], start: Node) -> dict[Node: Rational]:
-    """Find the minimum distance from start to all connected nodes on a direct, weighted graph."""
+    """Find the minimum distance from start to all connected nodes on a directed, weighted graph."""
     distances = dict.fromkeys(graph, inf)
     distances[start] = 0
     unvisited = set(graph)
