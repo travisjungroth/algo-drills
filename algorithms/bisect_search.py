@@ -6,7 +6,7 @@ from collections.abc import Callable
 
 
 def bisect_search(predicate: Callable[[int], bool], low: int, high: int) -> int:
-    """Find the lowest int between low and high where condition(int) is True."""
+    """Find the lowest int between low and high where predicate(int) is True."""
     while low < high:
         mid = low + (high - low) // 2
         if predicate(mid):
