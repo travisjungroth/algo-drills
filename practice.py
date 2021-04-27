@@ -1,6 +1,7 @@
-from __future__ import annotations
-
+#!/usr/bin/env python3
+"""Optionally takes the uuid or name of the algorithm you want."""
 from datetime import timedelta
+import sys
 
 from src import Algo, Completion, minutes_seconds, start_timer, stop_timer, Workspace
 
@@ -16,7 +17,11 @@ def practice() -> None:
         if Algo.done_today().issuperset(Algo.allowed()):
             print('*')
     if algo is None or workspace.matches(algo):
-        new_algo = workspace.advance()
+        if len(sys.argv) > 1:
+            requested_algo = Algo.from_id_or_name(sys.argv[1])
+        else:
+            requested_algo = None
+        new_algo = workspace.advance(requested_algo)
         start_timer()
         print(f'Try {new_algo}')
     else:

@@ -90,6 +90,13 @@ class Algo(Code):
         return {a.uuid(): a for a in cls.all()}
 
     @classmethod
+    def from_id_or_name(cls, s: str) -> Algo:
+        for algo in cls.all():
+            if algo.uuid() == s or algo.name == s:
+                return algo
+        raise ValueError(f"Couldn't find algo with name or id {s}.")
+
+    @classmethod
     def allowed(cls) -> list[Algo]:
         file = Path('data/allowed.csv')
         if not file.exists():
@@ -142,8 +149,9 @@ class Workspace(Code):
         with open(self.file_name, 'w') as f:
             f.write(algo.workspace_ready())
 
-    def advance(self) -> Algo:
-        algo = choose_algo(Completion.history(), Algo.allowed())
+    def advance(self, algo: Optional[Algo] = None) -> Algo:
+        if algo is None:
+            algo = choose_algo(Completion.history(), Algo.allowed())
         self.write_algo(algo)
         return algo
 
