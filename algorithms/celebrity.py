@@ -1,6 +1,6 @@
 """
 ID: 834cdcc9-ff3e-497c-884e-8bf6a93a90c1
-Python Algorithms, page 80
+Python Algorithms, Page 80
 https://leetcode.com/problems/find-the-celebrity/
 """
 from collections.abc import Callable

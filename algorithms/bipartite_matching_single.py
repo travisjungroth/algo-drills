@@ -1,6 +1,6 @@
 """
 ID: 916cdf1e-c509-4dfe-bdee-fef5ad30798a
-Python Algorithms, page 78
+Python Algorithms, Page 78
 """
 from collections.abc import Sequence
 
