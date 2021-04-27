@@ -1,5 +1,6 @@
 """
 ID: d5c1e52d-602a-4c27-a39f-2b53caff987d
+Grokking Algorithms, Page 3
 https://leetcode.com/discuss/general-discussion/786126/Python-Powerful-Ultimate-Binary-Search-Template.-Solved-many-problems
 """
 from collections.abc import Callable
