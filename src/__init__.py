@@ -13,7 +13,7 @@ from pathlib import Path
 import re
 from time import time
 import tokenize
-from typing import ClassVar, Iterable, Optional
+from typing import Any, ClassVar, Iterable, Optional
 
 
 class Code(ABC):
@@ -65,7 +65,7 @@ class Code(ABC):
     def diff(self, other: Code) -> str:
         return '\n'.join(ndiff(self.diff_ready(), other.diff_ready()))
 
-    def matches(self, other: Code) -> bool:
+    def matches(self, other: Any) -> bool:
         return isinstance(other, Code) and self.diff_ready() == other.diff_ready()
 
 
