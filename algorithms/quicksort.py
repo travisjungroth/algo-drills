@@ -14,7 +14,7 @@ from hints import T
 
 
 def quicksort(seq: Sequence[T]) -> list[T]:
-    if len(seq) <= 1:
+    if len(seq) < 2:
         return list(seq)
     low, pivot, high = partition(seq)
     return quicksort(low) + [pivot] + quicksort(high)
