@@ -10,10 +10,13 @@ import io
 from itertools import groupby
 import os
 from pathlib import Path
+import random
 import re
 from time import time
 import tokenize
 from typing import Any, ClassVar, Iterable, Optional
+
+random.seed(0)
 
 
 class Code(ABC):
@@ -192,18 +195,26 @@ class Completion:
                     f.write(f'  {completion.datetime.strftime("%I:%M%p")} {completion.algo}\n')
 
 
-def choose_algo(history: Sequence[Completion], algos: Iterable[Algo]) -> Algo:
+def choose_algo(history: Sequence[Completion], algos: Sequence[Algo]) -> Algo:
     history = [completion.algo for completion in history]
-    if not history:
+    if not history:  # if nothing, grab the first
         return next(iter(algos))
     last = history[0]
     count = history.count(last)
     reps = max(1, 3 - (count // 12))
-    if len(history) < reps:
+    if len(history) < reps:  # not enough reps
         return last
-    if not all(last == h for h in history[1:reps]):
+    if not all(last == h for h in history[1:reps]):  # also not enough reps
         return last
-    return max(algos, key=lambda x: history.index(x) if x in history else len(history))
+    for algo in algos:
+        if algo not in history:  # something new
+            return algo
+    arranged = sorted(algos, key=history.index, reverse=True)
+    if len(algos) > 5:  # if it's long, let's maybe swap things to change it up
+        repeats_removed = [k for k, g in groupby(history)]
+        if set(repeats_removed[:len(algos)]) == set(algos) and random.choice([True, False]):
+            return arranged[-2]
+    return arranged[-1]  # oldest one
 
 
 def start_timer() -> None:
