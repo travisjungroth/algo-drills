@@ -5,7 +5,7 @@ Python Algorithms, Page 79
 from collections import defaultdict
 from collections.abc import Callable, Iterable
 
-from typehints import T
+from src.typehints import T
 
 
 def counting_sort_dict(items: Iterable[T], key: Callable[[T], int] = lambda x: x) -> Iterable[T]:

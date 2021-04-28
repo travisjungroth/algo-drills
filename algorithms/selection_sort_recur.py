@@ -4,7 +4,7 @@ Python Algorithms, Page 75
 """
 from collections.abc import MutableSequence
 
-from typehints import T
+from src.typehints import T
 
 
 def selection_sort_recur(seq: MutableSequence[T], i=0) -> None:

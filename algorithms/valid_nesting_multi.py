@@ -7,7 +7,7 @@ This version ignores characters that aren't openers or closers. That can be chan
 """
 from collections.abc import Mapping, Sequence
 
-from typehints import Node
+from src.typehints import Node
 
 
 def valid_nesting_multi(items: Sequence[Node], openers_to_closers: Mapping[Node, Node]) -> bool:

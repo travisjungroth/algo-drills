@@ -5,7 +5,7 @@ Python Algorithms, Page 123
 from collections.abc import Sequence
 
 from algorithms.partition import partition
-from typehints import T
+from src.typehints import T
 
 
 def quickselect(seq: Sequence[T], k: int) -> T:

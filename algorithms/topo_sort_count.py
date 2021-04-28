@@ -8,7 +8,7 @@ from collections import Counter
 from collections.abc import Iterable, Mapping
 from itertools import chain
 
-from typehints import Node
+from src.typehints import Node
 
 
 def topo_sort_count(graph: Mapping[Node, Iterable]) -> Iterable[Node]:

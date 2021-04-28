@@ -10,7 +10,7 @@ Add that to allowed.csv, also, to get the full algorithm.
 from collections.abc import Sequence
 
 from algorithms.partition import partition
-from typehints import T
+from src.typehints import T
 
 
 def quicksort(seq: Sequence[T]) -> list[T]:

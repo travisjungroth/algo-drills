@@ -10,7 +10,7 @@ from heapq import heappop, heappush
 from numbers import Real
 from typing import Optional
 
-from typehints import Node
+from src.typehints import Node
 
 
 def dijkstras_path_pq(

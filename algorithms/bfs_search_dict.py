@@ -5,7 +5,7 @@ Grokking Algorithms, Page 95
 from collections import deque
 from collections.abc import Callable, Iterable, Mapping
 
-from typehints import Node
+from src.typehints import Node
 
 
 def bfs_search_dict(graph: Mapping[Node, Iterable[Node]], start: Node, predicate: Callable[[Node], bool]) -> bool:
