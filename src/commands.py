@@ -18,10 +18,10 @@ def practice(args) -> str:
         if Algo.done_today().issuperset(Algo.allowed()):
             out.append('Did every algo today')
     if algo is None or workspace.matches(algo):
-        requested_algo = Algo.from_id_or_name(args.algo)
-        new_algo = workspace.advance(requested_algo)
+        requested_algo = Algo.from_id_or_name(args.algo) if args.algo else None
+        next_algo = workspace.advance(requested_algo)
         start_timer()
-        out.append(f'Try {new_algo}')
+        out.append(f'Try {next_algo}')
     else:
         out.append(algo.diff(workspace))
     return '\n'.join(out)
