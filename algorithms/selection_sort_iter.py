@@ -8,7 +8,7 @@ It uses methods and functions that do iteration versus for-loops. Just remember 
 """
 from collections.abc import MutableSequence
 
-from hints import T
+from typehints import T
 
 
 def selection_sort_iter(seq: MutableSequence[T]) -> None:

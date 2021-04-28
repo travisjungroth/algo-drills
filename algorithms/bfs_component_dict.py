@@ -6,7 +6,7 @@ Python Algorithms, Page 102
 from collections import deque
 from collections.abc import Iterable, Mapping, Set
 
-from hints import Node
+from typehints import Node
 
 
 def bfs_component_dict(graph: Mapping[Node, Set[Node]], start: Node) -> Iterable[Node]:

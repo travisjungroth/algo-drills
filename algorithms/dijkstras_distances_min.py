@@ -11,7 +11,7 @@ from collections.abc import Mapping
 from math import inf
 from numbers import Rational
 
-from hints import Node
+from typehints import Node
 
 
 def dijkstras_distances_min(graph: Mapping[Node, Mapping[Node, Rational]], start: Node) -> dict[Node: Rational]:

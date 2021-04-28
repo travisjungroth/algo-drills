@@ -5,7 +5,7 @@ https://eddmann.com/posts/depth-first-search-and-breadth-first-search-in-python/
 from collections import deque
 from collections.abc import Iterable, Mapping
 
-from hints import Node
+from typehints import Node
 
 
 def bfs_paths_dict(graph: Mapping[Node, set[Node]], start: Node, goal: Node) -> Iterable[list[Node]]:

@@ -8,7 +8,7 @@ pass into those algorithms for different performance.
 """
 from collections.abc import Sequence
 
-from hints import T
+from typehints import T
 
 
 def partition(seq: Sequence[T]) -> tuple[list[T], T, list[T]]:

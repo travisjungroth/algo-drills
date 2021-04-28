@@ -5,7 +5,7 @@ https://en.wikipedia.org/wiki/Counting_sort
 from collections.abc import Callable, Sequence
 from itertools import accumulate
 
-from hints import T
+from typehints import T
 
 
 def counting_sort_list(items: Sequence[T], key: Callable[[T], int] = lambda x: x):

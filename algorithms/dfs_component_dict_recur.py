@@ -5,7 +5,7 @@ https://eddmann.com/posts/depth-first-search-and-breadth-first-search-in-python/
 from collections.abc import Mapping, Set
 from typing import Optional
 
-from hints import Node
+from typehints import Node
 
 
 def dfs_component_dict_recur(

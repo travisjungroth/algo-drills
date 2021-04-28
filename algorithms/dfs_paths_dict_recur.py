@@ -4,7 +4,7 @@ ID: 3df740e0-34f3-4852-add2-7076c8be47c3
 from collections.abc import Iterable, Mapping
 from typing import Optional
 
-from hints import Node
+from typehints import Node
 
 
 def dfs_paths_dict_recur(
