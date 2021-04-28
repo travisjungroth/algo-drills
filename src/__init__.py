@@ -98,11 +98,11 @@ class Algo(Code):
 
     @classmethod
     def allowed(cls) -> list[Algo]:
-        file = Path('data/allowed.csv')
+        file = Path('user_data/allowed.csv')
         if not file.exists():
             with file.open('w+') as f:
                 f.write('d5c1e52d-602a-4c27-a39f-2b53caff987d\n')  # bisect_search
-        with open('data/allowed.csv') as f:
+        with open('user_data/allowed.csv') as f:
             allowed_ids = set(f.read().splitlines())
             allowed_ids.discard('')
         return [x for x in cls.all() if x.uuid() in allowed_ids]
@@ -160,7 +160,7 @@ class Workspace(Code):
 class Completion:
     algo: Algo
     datetime: datetime = field(default_factory=lambda: datetime.now().astimezone())
-    history_path: ClassVar[Path] = Path('data/history.csv')
+    history_path: ClassVar[Path] = Path('user_data/history.csv')
 
     @classmethod
     def history(cls) -> list[Completion]:
@@ -181,7 +181,7 @@ class Completion:
 
     @classmethod
     def update_display_history(cls) -> None:
-        with open('data/history.txt', 'w+') as f:
+        with open('user_data/history.txt', 'w+') as f:
             for date, completions in groupby(cls.history(), lambda x: x.datetime.date()):
                 f.write(f'{date.strftime(f"%A, %B {date.day}, %Y")}\n')
                 for completion in completions:
@@ -203,13 +203,13 @@ def choose_algo(history: Sequence[Completion], algos: Iterable[Algo]) -> Algo:
 
 
 def start_timer() -> None:
-    with open('data/start_time.txt', 'w+') as f:
+    with open('user_data/start_time.txt', 'w+') as f:
         f.write(str(int(time())))
 
 
 def stop_timer() -> Optional[timedelta]:
     now = int(time())
-    with open('data/start_time.txt', 'r+') as f:
+    with open('user_data/start_time.txt', 'r+') as f:
         txt = f.read()
         if not txt:
             return None
