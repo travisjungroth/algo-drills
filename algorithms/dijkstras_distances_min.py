@@ -25,5 +25,5 @@ def dijkstras_distances_min(graph: Mapping[Node, Mapping[Node, Rational]], start
         unvisited.remove(node)
         distance = distances[node]
         for next_node, weight in graph[node].items():
-            distances[next_node] = min(distance + weight, distances[next_node])
+            distances[next_node] = min(distances[next_node], distance + weight)
     return distances
