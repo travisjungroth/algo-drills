@@ -131,8 +131,12 @@ class Workspace(Code):
     file_name: str = 'workspace.py'
 
     def text(self) -> str:
-        with open(self.file_name) as f:
-            return f.read()
+        try:
+            with open(self.file_name) as f:
+                return f.read()
+        except FileNotFoundError:
+            open(self.file_name, 'a').close()
+            return ''
 
     def algo(self) -> Optional[Algo]:
         """Grab the algo from the function name"""
