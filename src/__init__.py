@@ -109,7 +109,7 @@ class Algo(Code):
 
     @classmethod
     def done_today(cls) -> set[Algo]:
-        return {c.algo for c in Completion.history() if c.datetime.date() == datetime.today()}
+        return {c.algo for c in Completion.history() if c.datetime.date() == datetime.today().date()}
 
     def text(self) -> str:
         with open(f'{self.dir}/{self.name}.py') as f:

@@ -15,7 +15,7 @@ def practice() -> None:
         if completion_time < timedelta(minutes=15):
             print(minutes_seconds(completion_time))
         if Algo.done_today().issuperset(Algo.allowed()):
-            print('*')
+            print('Did every algo today')
     if algo is None or workspace.matches(algo):
         if len(sys.argv) > 1:
             requested_algo = Algo.from_id_or_name(sys.argv[1])
