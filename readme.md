@@ -4,17 +4,17 @@ A tool for memorizing algorithms in Python by typing them. In alpha and things w
 
 ## How it works
 
-1. Fill out an algorithm based on its function signature and docstring.
+1. Type out an algorithm based on its function signature and docstring.
 2. See what you did wrong or get a new algorithm.
 3. Repeat until bored.
 
-## Quickstart
+## Getting Started
 
 1. [Clone this repo](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
    .
-2. Look at `algos/bisect_search.py` and its references.
+2. Look at `algorithms/bisect_search.py` and its references.
 3. Run `./drill.py practice`
-4. Fill out the newly created `worskpace.py` to match the code in `bisect_search.py`. Do it from memory or look back at
+4. Fill out the newly created `worskpace.py` to match the code in `algorithms/bisect_search.py`. Do it from memory or look back at
    the file.
 5. Run `./drill.py practice` again. You'll do this a lot. Maybe make a shortcut.
 6. If your code matches, it will be deleted and you can try again. If it's different, you'll get a diff.
