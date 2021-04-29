@@ -50,3 +50,5 @@ Yes! Just two books right now. `./drills.py reference --help`
 Yes! Tell me how you like this tool, submit a bug report (or fix!), tell me if you have a feature idea, show your
 friends, or show me your own cool algorithms. You can email me at my last name at gmail, or message me on reddit
 at [/u/travisjungroth](https://www.reddit.com/u/travisjungroth).
+
+<sub>Made with 🌮 in Tulum, Mexico</sub>
