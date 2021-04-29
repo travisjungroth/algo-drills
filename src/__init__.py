@@ -209,7 +209,7 @@ def choose_algo(history: Sequence[Completion], algos: Sequence[Algo]) -> Algo:
     for algo in algos:
         if algo not in history:  # something new
             return algo
-    arranged = sorted(algos, key=history.index, reverse=True)
+    arranged = sorted(algos, key=history.index)
     if len(algos) > 5:  # if it's long, let's maybe swap things to change it up
         repeats_removed = [k for k, g in groupby(history)]
         if set(repeats_removed[:len(algos)]) == set(algos) and random.choice([True, False]):
