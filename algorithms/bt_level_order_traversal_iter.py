@@ -12,12 +12,12 @@ from typing import Iterable
 from src.typehints import BTNode
 
 
-def bt_level_order_traversal_iter(root: BTNode) -> Iterable[tuple[BTNode]]:
+def bt_level_order_traversal_iter(root: BTNode) -> Iterable[list[BTNode]]:
     # would do a null check here if root was Optional
     level = deque([root])
     while level:
         # modify this line if you needed to grab the values
-        yield tuple(level)  # copy so it's not messed with
+        yield list(level)  # copy so it's not messed with
         for _ in range(len(level)):
             node = level.pop()
             for child in [node.right, node.left]:
