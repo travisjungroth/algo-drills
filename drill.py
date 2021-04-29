@@ -45,7 +45,7 @@ if __name__ == '__main__':
     parser_search.add_argument(
         '-s',
         '--skip-allow',
-        help='Skip allowing it to the allow list.',
+        help='Skip adding it to the allow list.',
         default=False,
         action='store_false',
     )
