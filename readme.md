@@ -1,6 +1,6 @@
 # Algo Drills
 
-A tool for memorizing algorithms in Python by typing them. In alpha and things will change.
+A command line tool for memorizing algorithms in Python by typing them. In alpha and things will change.
 
 ## How it works
 
