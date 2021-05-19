@@ -18,7 +18,7 @@ def dfs_paths_dict_recur(
         path = [start]
     if start == goal:
         yield path
-        return
-    for next_node in graph[start].difference(path):
-        next_path = path + [next_node]
-        yield from dfs_paths_dict_recur(graph, next_node, goal, next_path)
+    else:
+        for next_node in graph[start].difference(path):
+            next_path = path + [next_node]
+            yield from dfs_paths_dict_recur(graph, next_node, goal, next_path)
