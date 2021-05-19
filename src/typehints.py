@@ -9,5 +9,5 @@ T = TypeVar('T')
 @dataclass
 class BTNode:
     val: int
-    left: Optional['BTNode']
-    right: Optional['BTNode']
+    left: Optional['BTNode'] = None
+    right: Optional['BTNode'] = None
