@@ -18,6 +18,7 @@ def bfs_search_grid(grid: Sequence[Sequence[int]], start: tuple[int, int], goal:
         adjacent = {(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)}
         for next_node in adjacent - seen:
             r1, c1 = next_node
+            # Using these range objects is a concise alternative to 0 <= r1 < len(graph) and 0 <= c1 < len(graph[0])
             if r1 in rows and c1 in cols and grid[r1][c1]:
                 seen.add(next_node)
                 to_visit.append(next_node)
