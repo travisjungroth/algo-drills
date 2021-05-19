@@ -13,8 +13,8 @@ from src.typehints import T
 
 def selection_sort_iter(seq: MutableSequence[T]) -> None:
     """Use selection sort iteratively on a list in-place."""
-    for i, _ in enumerate(seq):  # Maybe more Pythonic than range(len(seq))
+    for i, val in enumerate(seq):
         min_val = min(seq[i:])
-        min_val_i = seq.index(min_val, i)  # First index of min_val at or after i
-        seq[min_val_i] = seq[i]
         seq[i] = min_val
+        min_val_i = seq.index(min_val, i)  # First index of min_val at or after i
+        seq[min_val_i] = val
