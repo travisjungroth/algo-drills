@@ -14,9 +14,9 @@ def leaf_similar(root1: Node, root2: Node) -> bool:
     Return true if and only if the two given trees with head nodes root1 and root2 are leaf-similar.
     """
     def dfs(root):
-        if not root:
+        if root is None:
             return
-        if not root.left and not root.right:
+        if root.left is None and root.right is None:
             yield root.val
         yield from dfs(root.left)
         yield from dfs(root.right)
