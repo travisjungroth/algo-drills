@@ -18,6 +18,6 @@ def bfs_search_dict(graph: Mapping[Node, Iterable[Node]], start: Node, predicate
             continue
         visited.add(node)
         if predicate(node):
-            return True
+            return node
         to_visit.append(graph[node])
     return False
