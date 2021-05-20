@@ -9,7 +9,7 @@ from src.typehints import Node
 
 
 def bfs_search_dict(graph: Mapping[Node, Iterable[Node]], start: Node, predicate: Callable[[Node], bool]) -> bool:
-    """Find the closest node to start that matches the predicate using breadth first search."""
+    """Find if there is a node reachable from start that matches the predicate using breadth first search."""
     visited = set()
     to_visit = deque([start])
     while to_visit:
@@ -18,6 +18,6 @@ def bfs_search_dict(graph: Mapping[Node, Iterable[Node]], start: Node, predicate
             continue
         visited.add(node)
         if predicate(node):
-            return node
-        to_visit.append(graph[node])
+            return True
+        to_visit += graph[node]
     return False
