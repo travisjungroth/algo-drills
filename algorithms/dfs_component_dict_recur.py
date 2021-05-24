@@ -17,6 +17,6 @@ def dfs_component_dict_recur(
     if component is None:
         component = set()
     component.add(start)
-    for next_node in graph[start] - component:
-        dfs_component_dict_recur(graph, next_node, component)
+    for new_node in graph[start] - component:
+        dfs_component_dict_recur(graph, new_node, component)
     return component
