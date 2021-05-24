@@ -19,6 +19,8 @@ def knapsack_simple(weights: Sequence[int], values: Sequence[int], capacity: int
         # Iterate backwards so we don't take things twice. Forwards would be the unbounded version of the problem.
         for sub_capacity in range(capacity, 0, -1):
             if weight <= sub_capacity:
-                new_value = best_values[sub_capacity - weight] + value
-                best_values[sub_capacity] = max(best_values[sub_capacity], new_value)
+                # These three lines can be refactored to one, or a slightly more efficient if instead of max.
+                take_value = value + best_values[sub_capacity - weight]
+                non_take_value = best_values[sub_capacity]
+                best_values[sub_capacity] = max(take_value, non_take_value)
     return best_values[-1]
