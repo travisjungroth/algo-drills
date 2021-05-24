@@ -10,7 +10,7 @@ def bipartite_matching_single(graph: Sequence[int]) -> list[int]:
     in_degrees = [0] * len(graph)  # This is an alternate to collections.Counter when the keys are 0-n.
     for target in graph:
         in_degrees[target] += 1
-    zero_in_degrees = [node for node, count in enumerate(in_degrees) if not count]
+    zero_in_degrees = [node for node, in_degree in enumerate(in_degrees) if not in_degree]
     while zero_in_degrees:
         node = zero_in_degrees.pop()
         target = matches[node]
