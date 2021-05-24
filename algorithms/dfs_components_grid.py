@@ -14,8 +14,8 @@ def dfs_components_grid(grid: Sequence[Sequence[int]]) -> Iterable[set[tuple[int
         while to_visit:
             r, c = to_visit.pop()
             adjacent = {(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)}
-            seen = adjacent & unseen
-            unseen -= seen
-            component |= seen
-            to_visit.extend(seen)
+            next_nodes = adjacent & unseen
+            to_visit.extend(next_nodes)
+            component |= next_nodes
+            unseen -= next_nodes
         yield component
