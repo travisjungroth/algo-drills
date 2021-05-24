@@ -11,5 +11,5 @@ from src.typehints import BTNode
 def bt_inorder_traversal_recur(root: Optional[BTNode]) -> Iterable[BTNode]:
     if root is not None:
         yield from bt_inorder_traversal_recur(root.left)
-        yield root.val
+        yield root
         yield from bt_inorder_traversal_recur(root.right)
