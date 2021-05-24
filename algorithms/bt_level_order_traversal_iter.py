@@ -19,7 +19,7 @@ def bt_level_order_traversal_iter(root: BTNode) -> Iterable[list[BTNode]]:
         # modify this line if you needed to grab the values
         yield list(level)  # copy so it's not messed with
         for _ in range(len(level)):
-            node = level.pop()
-            for child in [node.right, node.left]:
+            node = level.popleft()
+            for child in [node.left, node.right]:
                 if child is not None:
-                    level.appendleft(child)
+                    level.append(child)
