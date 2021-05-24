@@ -201,10 +201,9 @@ def choose_algo(history: Sequence[Completion], algos: Sequence[Algo]) -> Algo:
         return next(iter(algos))
     last = history[0]
     count = history.count(last)
-    reps = max(1, 3 - (count // 12))
-    if len(history) < reps:  # not enough reps
-        return last
-    if not all(last == h for h in history[1:reps]):  # also not enough reps
+    rep_scheme = [3] * 3 * 3 + [2] * 2 * 3  # [reps] * reps * sets
+    reps = rep_scheme[count] if count < len(rep_scheme) else 1
+    if len(history) < reps or not all(last == h for h in history[1:reps]):  # not enough reps
         return last
     for algo in algos:
         if algo not in history:  # something new
